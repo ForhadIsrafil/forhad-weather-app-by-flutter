@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:if_weather/headers/bar.dart';
 import 'package:if_weather/home.dart';
 import 'home.dart';
 
