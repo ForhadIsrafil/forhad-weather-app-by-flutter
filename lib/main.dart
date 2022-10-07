@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'headers/bar.dart';
+import 'package:if_weather/headers/bar.dart';
+import 'package:if_weather/home.dart';
+import 'home.dart';
 
 // void main() {
 //   runApp(const MyApp());
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       // title: 'iF Weather',
-      home: Header(),
+      home: Home(),
     );
   }
 }
