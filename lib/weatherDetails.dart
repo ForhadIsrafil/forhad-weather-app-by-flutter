@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:if_weather/utils/bar.dart';
+import 'utils/seven_days_weather.dart';
+import 'main.dart';
+
 
 class WeatherDetails extends StatelessWidget {
   const WeatherDetails({Key? key}) : super(key: key);
@@ -143,25 +146,20 @@ class WeatherDetails extends StatelessWidget {
             Container(
               color: Colors.indigo,
               padding: const EdgeInsets.all(5.0),
-              height: 400.0,
+              height: 150.0,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Column(
-
-                    children: [
-                      Row(
-                        children: const [
-                          Text("data"),
-                          Text("data"),
-                          Text("data"),
-                          Text("data"),
-                        ],
-                      )
-                    ],
-                  ),
+                  sevenDaysWeather("Sat", Icons.cloud_circle, "20"),
+                  sevenDaysWeather("Sun", Icons.cloud_circle, "20"),
+                  sevenDaysWeather("Mon", Icons.thunderstorm, "20"),
+                  sevenDaysWeather("Tue", Icons.thunderstorm_outlined, "20"),
+                  sevenDaysWeather("Wed", Icons.cloud_circle, "20"),
+                  sevenDaysWeather("Thur", Icons.cloud_circle, "20"),
+                  sevenDaysWeather("Fri", Icons.water_drop_outlined, "20"),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
