@@ -20,7 +20,7 @@ class WeatherDetails extends StatelessWidget {
           children: [
             Container(
               color: Colors.teal,
-              height: 200.0,
+              height: 150.0,
               padding: const EdgeInsets.only(left: 90.0),
               child: Stack(
                 children: const [
@@ -61,7 +61,7 @@ class WeatherDetails extends StatelessWidget {
                     child: Text(
                       "Air Quality 8(AQI)",
                       style: TextStyle(
-                          fontSize: 15.0, fontWeight: FontWeight.bold),
+                          fontSize: 20.0, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -164,12 +164,72 @@ class WeatherDetails extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              // height: random.nextInt(200).toDouble() >= 100 ? random.nextInt(200).toDouble() : 200.0,
-              // color: Color.fromARGB(random.nextInt(255), random.nextInt(255),
-              //     random.nextInt(255), random.nextInt(255)),
-              // child: ,
+            Stack(
+              alignment: AlignmentDirectional.center,
+              // fit: StackFit.expand,
+              children: [
+                Container(
+                  // height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  // height: random.nextInt(200).toDouble() >= 100 ? random.nextInt(200).toDouble() : 200.0,
+                  // color: Color.fromARGB(random.nextInt(255), random.nextInt(255),
+                  //     random.nextInt(255), random.nextInt(255)),
 
+                  child: CustomPaint(
+                    painter: ShapePainter(),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: const EdgeInsets.only(bottom: 95, left: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      Icon(
+                        Icons.sunny,
+                        size: 50,
+                        color: Colors.yellow,
+                      ),
+                      Text(
+                        "Sunrise",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red),
+                      ),
+                      Text(
+                        "5:50",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.topRight,
+                  padding: const EdgeInsets.only(bottom: 95, right: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      Icon(
+                        Icons.sunny,
+                        size: 50,
+                        color: Colors.black54,
+                      ),
+                      Text(
+                        "Sunset",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blueGrey),
+                      ),
+                      Text(
+                        "5:50",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -178,36 +238,27 @@ class WeatherDetails extends StatelessWidget {
   }
 }
 
-class SunRiseSed extends StatefulWidget {
-  const SunRiseSed({Key? key}) : super(key: key);
+// FOR PAINTING LINES
+class ShapePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint()
+      ..color = Colors.teal
+      ..strokeWidth = 5
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.butt;
+
+    Offset startingPoint = Offset(20, size.height / 2);
+    Offset endingPoint = Offset(size.width - 20, size.height / 2);
+
+    canvas.drawLine(startingPoint, endingPoint, paint);
+
+    // Offset center = Offset(size.width / 2, size.height / 2);
+    // canvas.drawCircle(center, 50, paint);
+  }
 
   @override
-  State<SunRiseSed> createState() => _SunRiseSedState();
-}
-
-class _SunRiseSedState extends State<SunRiseSed> {
-  bool selected = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selected = !selected;
-        });
-      },
-      child: Center(
-        child: Container(
-          // color: Colors.red,
-          child: AnimatedAlign(
-
-            alignment: selected ? Alignment.topRight : Alignment.topLeft,
-            duration: const Duration(seconds: 1),
-            curve: Curves.easeInCubic,
-            child: const Icon(Icons.sunny, size: 50.0, color: Colors.yellow,),
-          ),
-        ),
-      ),
-    );
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
