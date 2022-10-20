@@ -6,10 +6,11 @@ AppBar myBar() {
     title: const Text("Forhad's Weather"),
     centerTitle: true,
     actions: const [
-      Image(
-        image: AssetImage("images/forhad.png"),
-        alignment: Alignment.center,
-        fit: BoxFit.contain,
+      CircleAvatar(
+        foregroundImage: AssetImage("images/forhad.png"),
+        maxRadius: 30.0,
+        // alignment: Alignment.center,
+        // fit: BoxFit.contain,
       ),
     ],
     shadowColor: Colors.green,

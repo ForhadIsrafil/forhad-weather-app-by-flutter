@@ -1,14 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'main.dart';
 import 'package:if_weather/utils/bar.dart';
 import 'utils/seven_days_weather.dart';
 import 'main.dart';
-
 
 class WeatherDetails extends StatelessWidget {
   const WeatherDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final random = Random();
+
     return Scaffold(
       appBar: myBar(),
       body: Center(
@@ -160,17 +164,50 @@ class WeatherDetails extends StatelessWidget {
                 ],
               ),
             ),
+            Container(
+              // height: random.nextInt(200).toDouble() >= 100 ? random.nextInt(200).toDouble() : 200.0,
+              // color: Color.fromARGB(random.nextInt(255), random.nextInt(255),
+              //     random.nextInt(255), random.nextInt(255)),
+              // child: ,
+
+            ),
           ],
         ),
       ),
     );
   }
 }
-// Text(
-// "Next 7 day Weather of the country",
-// // textAlign: TextAlign.center,
-// style: TextStyle(
-// fontSize: 20.0,
-// fontWeight: FontWeight.bold,
-// color: Colors.white),
-// ),
+
+class SunRiseSed extends StatefulWidget {
+  const SunRiseSed({Key? key}) : super(key: key);
+
+  @override
+  State<SunRiseSed> createState() => _SunRiseSedState();
+}
+
+class _SunRiseSedState extends State<SunRiseSed> {
+  bool selected = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selected = !selected;
+        });
+      },
+      child: Center(
+        child: Container(
+          // color: Colors.red,
+          child: AnimatedAlign(
+
+            alignment: selected ? Alignment.topRight : Alignment.topLeft,
+            duration: const Duration(seconds: 1),
+            curve: Curves.easeInCubic,
+            child: const Icon(Icons.sunny, size: 50.0, color: Colors.yellow,),
+          ),
+        ),
+      ),
+    );
+  }
+}
