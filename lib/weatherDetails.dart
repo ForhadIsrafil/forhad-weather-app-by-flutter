@@ -168,7 +168,7 @@ class WeatherDetails extends StatelessWidget {
               alignment: AlignmentDirectional.center,
               // fit: StackFit.expand,
               children: [
-                Container(
+                SizedBox(
                   // height: 50,
                   width: MediaQuery.of(context).size.width,
                   // height: random.nextInt(200).toDouble() >= 100 ? random.nextInt(200).toDouble() : 200.0,
