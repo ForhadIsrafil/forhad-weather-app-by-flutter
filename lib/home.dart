@@ -35,12 +35,15 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Scaffold(
+        body: Center(
       child: Container(
         // alignment: Alignment.topCenter,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('images/weather.jpg'), fit: BoxFit.cover)),
+        // decoration: const BoxDecoration(
+        //   gradient: ,
+        //   image: DecorationImage(
+        //       image: AssetImage('images/weather.jpg'), fit: BoxFit.cover),
+        // ),
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
@@ -55,24 +58,46 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
                   LengthLimitingTextInputFormatter(10),
                 ],
                 // onChanged: (value) {},
+                style: const TextStyle(),
                 decoration: InputDecoration(
                   label: const Text('Country Name',
                       style: TextStyle(fontSize: 20.0, color: Colors.white)),
                   hintText: "Enter Country Name",
-                  suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.search),
-                    color: Colors.red,
-                    iconSize: 30.0,
-                    tooltip: "Search",
-                  ),
-                  border: const OutlineInputBorder(),
-                  fillColor: Colors.blueGrey,
+                  suffixIcon: const Icon(Icons.search, color: Colors.white),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                          width: 200,
+                          strokeAlign: StrokeAlign.outside,
+                          color: Colors.black,
+                          style: BorderStyle.solid)),
+                  fillColor: Colors.teal,
                   filled: true,
                 ),
                 autocorrect: true,
               ),
-
+            ),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  elevation: 14.0,
+                  backgroundColor: Colors.teal,
+                  fixedSize: const Size(100, 30),
+                  side: const BorderSide(
+                      color: Colors.cyanAccent,
+                      width: 1.0,
+                      style: BorderStyle.solid),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  // minimumSize: const Size(10, 50),
+                  // maximumSize: const Size(10, 50),
+                  padding: const EdgeInsets.all(2),
+                  shadowColor: Colors.cyanAccent,
+                ),
+                child: const Text("Submit"),
+              ),
             ),
             Container(
               alignment: Alignment.center,
@@ -153,6 +178,6 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
           ],
         ),
       ),
-    );
+    ));
   }
 }
