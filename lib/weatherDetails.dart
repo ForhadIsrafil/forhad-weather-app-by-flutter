@@ -7,7 +7,9 @@ import 'utils/seven_days_weather.dart';
 import 'main.dart';
 
 class WeatherDetails extends StatelessWidget {
-  const WeatherDetails({Key? key}) : super(key: key);
+  WeatherDetails({Key? key, required this.inputCountry}) : super(key: key);
+
+  String inputCountry;
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +25,18 @@ class WeatherDetails extends StatelessWidget {
               height: 150.0,
               padding: const EdgeInsets.only(left: 90.0),
               child: Stack(
-                children: const [
+                children: [
                   Positioned(
                     top: 20.0,
                     // left: 85.50,
                     child: Text(
-                      "Country Name",
-                      style: TextStyle(
+                      "CName: $inputCountry",
+                      style: const TextStyle(
                           fontSize: 30.0, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Positioned(
+                  const Positioned(
                     top: 55.0,
                     // left: 85.50,
                     child: Text(
@@ -44,7 +46,7 @@ class WeatherDetails extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Positioned(
+                  const Positioned(
                     top: 85.0,
                     // left: 85.50,
                     child: Text(
@@ -54,7 +56,7 @@ class WeatherDetails extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Positioned(
+                  const Positioned(
                     bottom: 10.0,
                     right: 10.0,
                     // left: 85.50,
@@ -194,8 +196,7 @@ class WeatherDetails extends StatelessWidget {
                         "Sunrise",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red),
+                            fontWeight: FontWeight.bold, color: Colors.red),
                       ),
                       Text(
                         "5:50",

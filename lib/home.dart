@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:if_weather/weatherDetails.dart';
 import 'utils/bar.dart';
 
 class Home extends StatelessWidget {
@@ -23,9 +25,27 @@ class HandleWeatherInput extends StatefulWidget {
 }
 
 class _HandleWeatherInputState extends State<HandleWeatherInput> {
-  static List<String> countryList = <String>['One', 'Two', 'Three', 'Four'];
+  // static List<String> countryList = <String>['One', 'Two', 'Three', 'Four'];
 
-  String _defaultCountry = "BD";
+  var _defaultCountry = "BD";
+  var _inputCountry;
+  bool isError = false;
+
+  final _inputCountryController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _inputCountryController.addListener(_updateCountry);
+  }
+
+  void _updateCountry() {
+    setState(() {
+      _inputCountry = _inputCountryController.text;
+    });
+  }
 
   // void countryValue(value) {
   //   setState(() {
@@ -50,18 +70,23 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
             Container(
               // height: 48.0,
               // width: 800.0,
+              padding: const EdgeInsets.all(10.0),
               color: Colors.white,
               alignment: Alignment.center,
               margin: const EdgeInsets.all(2.0),
               child: TextFormField(
+                controller: _inputCountryController,
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(10),
                 ],
                 // onChanged: (value) {},
-                style: const TextStyle(),
+                style: const TextStyle(fontWeight: FontWeight.bold),
                 decoration: InputDecoration(
                   label: const Text('Country Name',
-                      style: TextStyle(fontSize: 20.0, color: Colors.white)),
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold)),
                   hintText: "Enter Country Name",
                   suffixIcon: const Icon(Icons.search, color: Colors.white),
                   border: OutlineInputBorder(
@@ -73,13 +98,37 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
                           style: BorderStyle.solid)),
                   fillColor: Colors.teal,
                   filled: true,
+                  errorText: isError == true
+                      ? "Country Name Is Too Short,\nAt Least 4 Words"
+                      : null,
+                  errorStyle: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 autocorrect: true,
               ),
             ),
             Center(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  // print("hitted.....");
+                  if (_inputCountryController.text.length < 4) {
+                    isError = true;
+                    Future.delayed(const Duration(seconds: 10), () {
+                      setState(() {
+                        isError = false;
+                      });
+                    });
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        // return const WeatherDetails(inputCountry: _inputCountryController.text);
+                        return WeatherDetails(
+                          inputCountry: _inputCountryController.text,
+                        );
+                      }),
+                    );
+                  }
+                },
                 style: ElevatedButton.styleFrom(
                   elevation: 14.0,
                   backgroundColor: Colors.teal,
@@ -108,7 +157,7 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
                   dropdownColor: Colors.black45,
                   borderRadius: BorderRadius.circular(7.0),
                   icon: const Icon(Icons.pin_drop, color: Colors.cyan),
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.tealAccent),
                   alignment: Alignment.center,
                   items: [
                     DropdownMenuItem(

@@ -4,6 +4,10 @@ import 'package:flutter/services.dart';
 AppBar myBar() {
   return AppBar(
     title: const Text("Forhad's Weather"),
+    // leading: IconButton(onPressed: () {
+    //   Navigator.pop(context)
+    // }, icon: const Icon(Icons.arrow_back_ios),
+    // ),
     centerTitle: true,
     actions: const [
       CircleAvatar(
