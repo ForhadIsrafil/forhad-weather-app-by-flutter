@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:if_weather/weatherDetails.dart';
 import 'utils/bar.dart';
+import 'package:requests/requests.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class HandleWeatherInput extends StatefulWidget {
 class _HandleWeatherInputState extends State<HandleWeatherInput> {
   // static List<String> countryList = <String>['One', 'Two', 'Three', 'Four'];
 
-  var _defaultCountry = "BD";
+  var _defaultCountry = "City";
   var _inputCountry;
   bool isError = false;
 
@@ -39,6 +40,10 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
     super.initState();
 
     _inputCountryController.addListener(_updateCountry);
+
+  //  get default weather data start
+
+  //  get default weather data end
   }
 
   void _updateCountry() {
@@ -155,38 +160,50 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
               child: DropdownButton(
                   value: _defaultCountry,
                   dropdownColor: Colors.black45,
+                  focusColor: Colors.indigoAccent,
                   borderRadius: BorderRadius.circular(7.0),
                   icon: const Icon(Icons.pin_drop, color: Colors.cyan),
                   style: const TextStyle(color: Colors.tealAccent),
                   alignment: Alignment.center,
                   items: [
                     DropdownMenuItem(
-                      value: "BD",
+                      value: "City",
+                      enabled: false,
                       alignment: Alignment.centerRight,
-                      child: const Text("BD"),
+                      child: const Text("City"),
                       onTap: () {
                         setState(() {
-                          _defaultCountry = "BD";
+                          _defaultCountry = "City";
                         });
                       },
                     ),
                     DropdownMenuItem(
-                      value: "India",
+                      value: "Dhaka",
                       alignment: Alignment.centerRight,
-                      child: const Text("India"),
+                      child: const Text("Dhaka"),
                       onTap: () {
                         setState(() {
-                          _defaultCountry = "India";
+                          _defaultCountry = "Dhaka";
                         });
                       },
                     ),
                     DropdownMenuItem(
-                      value: "Afghanistan",
+                      value: "Kabul",
                       alignment: Alignment.centerRight,
-                      child: const Text("Afghanistan"),
+                      child: const Text("Kabul"),
                       onTap: () {
                         setState(() {
-                          _defaultCountry = "Afghanistan";
+                          _defaultCountry = "Kabul";
+                        });
+                      },
+                    ),
+                    DropdownMenuItem(
+                      value: "Delhi",
+                      alignment: Alignment.centerRight,
+                      child: const Text("Delhi"),
+                      onTap: () {
+                        setState(() {
+                          _defaultCountry = "Delhi";
                         });
                       },
                     ),
@@ -195,34 +212,54 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
             ),
             Container(
               // color: Colors.cyan,
-              height: 120.0,
+              height: 200.0,
               width: 150.0,
               decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.5),
+                  color: Colors.teal,
                   border: Border.all(
                     color: Colors.blueGrey,
                     width: 6.0,
                   ),
-                  shape: BoxShape.circle
-                  // borderRadius: BorderRadius.circular(20.0),
-                  ),
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(15.0)),
               alignment: Alignment.center,
               margin: const EdgeInsets.only(top: 100.0),
               padding: const EdgeInsets.all(10.0),
-              child: const Text.rich(TextSpan(style: TextStyle(), children: [
-                TextSpan(
-                    text: "Dhaka\n",
+              child: ListView(
+                padding: const EdgeInsets.all(10.0),
+                children: const [Text.rich(TextSpan(style: TextStyle(), children: [
+                  TextSpan(
+                      text: "Dhaka\n",
+                      style: TextStyle(
+                        fontSize: 35.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      )),
+                  TextSpan(
+                    text: "Temperature: 30°\n",
                     style: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white)),
-                TextSpan(
-                    text: "30°",
+                        color: Colors.white),
+                  ),
+                  TextSpan(
+                    text: "Clear sky\n",
                     style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white)),
-              ])),
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  WidgetSpan(
+                      child: Image(
+                        image: NetworkImage(
+                            "https://openweathermap.org/img/wn/01n@2x.png"),
+                        color: Colors.yellow,
+                        alignment: Alignment.center,
+                        fit: BoxFit.fill,
+                      )),
+                ])),],
+              ),
             ),
           ],
         ),
@@ -230,3 +267,36 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
     ));
   }
 }
+
+// const Text.rich(TextSpan(style: TextStyle(), children: [
+// TextSpan(
+// text: "Dhaka\n",
+// style: TextStyle(
+// fontSize: 35.0,
+// fontWeight: FontWeight.bold,
+// color: Colors.white,
+// )),
+// TextSpan(
+// text: "Temperature: 30°\n",
+// style: TextStyle(
+// fontSize: 20.0,
+// fontWeight: FontWeight.bold,
+// color: Colors.white),
+// ),
+// TextSpan(
+// text: "Clear sky\n",
+// style: TextStyle(
+// fontSize: 15.0,
+// fontWeight: FontWeight.bold,
+// color: Colors.black54,
+// ),
+// ),
+// WidgetSpan(
+// child: Image(
+// image: NetworkImage(
+// "https://openweathermap.org/img/wn/01n@2x.png"),
+// color: Colors.yellow,
+// alignment: Alignment.center,
+// fit: BoxFit.fill,
+// )),
+// ])),
