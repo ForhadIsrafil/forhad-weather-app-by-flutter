@@ -1,10 +1,9 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'package:if_weather/utils/bar.dart';
 import 'utils/seven_days_weather.dart';
-import 'main.dart';
+
 
 class WeatherDetails extends StatelessWidget {
   WeatherDetails({Key? key, required this.inputCountry}) : super(key: key);
