@@ -41,9 +41,9 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
 
     _inputCountryController.addListener(_updateCountry);
 
-  //  get default weather data start
+    //  get default weather data start
 
-  //  get default weather data end
+    //  get default weather data end
   }
 
   void _updateCountry() {
@@ -227,39 +227,108 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
               padding: const EdgeInsets.all(10.0),
               child: ListView(
                 padding: const EdgeInsets.all(10.0),
-                children: const [Text.rich(TextSpan(style: TextStyle(), children: [
-                  TextSpan(
-                      text: "Dhaka\n",
+                children: const [
+                  Text.rich(TextSpan(style: TextStyle(), children: [
+                    TextSpan(
+                        text: "Dhaka\n",
+                        style: TextStyle(
+                          fontSize: 35.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        )),
+                    TextSpan(
+                      text: "Temperature: 30°\n",
                       style: TextStyle(
-                        fontSize: 35.0,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    TextSpan(
+                      text: "Clear sky\n",
+                      style: TextStyle(
+                        fontSize: 15.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                      )),
-                  TextSpan(
-                    text: "Temperature: 30°\n",
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                  TextSpan(
-                    text: "Clear sky\n",
-                    style: TextStyle(
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      ),
                     ),
-                  ),
-                  WidgetSpan(
-                      child: Image(
-                        image: NetworkImage(
-                            "https://openweathermap.org/img/wn/01n@2x.png"),
-                        color: Colors.yellow,
-                        alignment: Alignment.center,
-                        fit: BoxFit.fill,
-                      )),
-                ])),],
+                    WidgetSpan(
+                        child: Image(
+                      image: NetworkImage(
+                          "https://openweathermap.org/img/wn/01n@2x.png"),
+                      color: Colors.yellow,
+                      alignment: Alignment.center,
+                      fit: BoxFit.fill,
+                    )),
+                  ])),
+                ],
               ),
+            ),
+            Stack(
+              alignment: AlignmentDirectional.center,
+              // fit: StackFit.expand,
+              children: [
+                SizedBox(
+                  // height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  // height: random.nextInt(200).toDouble() >= 100 ? random.nextInt(200).toDouble() : 200.0,
+                  // color: Color.fromARGB(random.nextInt(255), random.nextInt(255),
+                  //     random.nextInt(255), random.nextInt(255)),
+
+                  child: CustomPaint(
+                    painter: ShapePainter(),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: const EdgeInsets.only(bottom: 100, left: 10, top: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      Icon(
+                        Icons.sunny,
+                        size: 50,
+                        color: Colors.yellow,
+                      ),
+                      Text(
+                        "Sunrise",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.red),
+                      ),
+                      Text(
+                        "5:50",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.topRight,
+                  padding:
+                      const EdgeInsets.only(bottom: 100, right: 10, top: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      Icon(
+                        Icons.sunny,
+                        size: 50,
+                        color: Colors.black54,
+                      ),
+                      Text(
+                        "Sunset",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blueGrey),
+                      ),
+                      Text(
+                        "5:50",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),
