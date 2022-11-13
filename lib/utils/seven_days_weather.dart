@@ -1,4 +1,11 @@
+import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:if_weather/utils/default_weather.dart';
+import 'dart:convert';
+
+import 'package:if_weather/weatherDetails.dart';
 
 Column sevenDaysWeather(String day, IconData icon, String weatherValue) {
   return Column(
@@ -24,7 +31,6 @@ Column sevenDaysWeather(String day, IconData icon, String weatherValue) {
         ],
       ),
       Row(
-
         children: [
           Text(
             "$weatherValue °C",
@@ -34,5 +40,137 @@ Column sevenDaysWeather(String day, IconData icon, String weatherValue) {
         ],
       ),
     ],
+  );
+}
+
+Center homeWeather(context, snapshot){
+  return Center(
+    child: ListBody(children: [
+      Container(
+        // color: Colors.cyan,
+        height: 200.0,
+        width: 150.0,
+        decoration: BoxDecoration(
+            color: Colors.teal,
+            border: Border.all(
+              color: Colors.blueGrey,
+              width: 6.0,
+            ),
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(15.0)),
+        alignment: Alignment.center,
+        margin: const EdgeInsets.only(top: 100.0),
+        padding: const EdgeInsets.all(10.0),
+        child: ListView(
+          padding: const EdgeInsets.all(10.0),
+          children: [
+            Text.rich(TextSpan(style: TextStyle(), children: [
+              const TextSpan(
+                  text: "Dhaka\n",
+                  style: TextStyle(
+                    fontSize: 35.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  )),
+              TextSpan(
+                text:
+                "Temperature: ${snapshot.data!.main['temp']}°\n",
+                style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+              TextSpan(
+                text:
+                "${snapshot.data!.weather[0]['description']}\n",
+                style: const TextStyle(
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              WidgetSpan(
+                  child: Image(
+                    image: NetworkImage(
+                        "https://openweathermap.org/img/wn/${snapshot.data!.weather[0]['icon']}@2x.png"),
+                    color: Colors.white,
+                    alignment: Alignment.center,
+                    fit: BoxFit.fill,
+                  )),
+            ])),
+          ],
+        ),
+      ),
+      // sunrise and sunset
+      Stack(
+        alignment: AlignmentDirectional.center,
+        // fit: StackFit.expand,
+        children: [
+          SizedBox(
+            // height: 50,
+            width: MediaQuery.of(context).size.width,
+            // height: random.nextInt(200).toDouble() >= 100 ? random.nextInt(200).toDouble() : 200.0,
+            // color: Color.fromARGB(random.nextInt(255), random.nextInt(255),
+            //     random.nextInt(255), random.nextInt(255)),
+
+            child: CustomPaint(
+              painter: ShapePainter(),
+            ),
+          ),
+          Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.only(
+                bottom: 100, left: 10, top: 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const Icon(
+                  Icons.sunny,
+                  size: 50,
+                  color: Colors.yellow,
+                ),
+                const Text(
+                  "Sunrise",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red),
+                ),
+                Text(
+                  integerToTime(snapshot.data!.sys['sunrise']),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            alignment: Alignment.topRight,
+            padding: const EdgeInsets.only(
+                bottom: 100, right: 10, top: 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const Icon(
+                  Icons.sunny,
+                  size: 50,
+                  color: Colors.black54,
+                ),
+                const Text(
+                  "Sunset",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueGrey),
+                ),
+                Text(
+                  integerToTime(snapshot.data!.sys['sunset']),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ]),
   );
 }

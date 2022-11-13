@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:if_weather/utils/seven_days_weather.dart';
 import 'package:if_weather/weatherDetails.dart';
 import 'utils/bar.dart';
 import 'utils/default_weather.dart';
@@ -146,63 +147,66 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
                 child: const Text("Submit"),
               ),
             ),
-            // Container(
-            //   alignment: Alignment.center,
-            //   width: 50.0,
-            //   // color: Colors.black87,
-            //   child: DropdownButton(
-            //       value: _defaultCountry,
-            //       dropdownColor: Colors.black45,
-            //       focusColor: Colors.indigoAccent,
-            //       borderRadius: BorderRadius.circular(7.0),
-            //       icon: const Icon(Icons.pin_drop, color: Colors.cyan),
-            //       style: const TextStyle(color: Colors.tealAccent),
-            //       alignment: Alignment.center,
-            //       items: [
-            //         DropdownMenuItem(
-            //           value: "City",
-            //           enabled: false,
-            //           alignment: Alignment.centerRight,
-            //           child: const Text("City"),
-            //           onTap: () {
-            //             setState(() {
-            //               _defaultCountry = "City";
-            //             });
-            //           },
-            //         ),
-            //         DropdownMenuItem(
-            //           value: "Dhaka",
-            //           alignment: Alignment.centerRight,
-            //           child: const Text("Dhaka"),
-            //           onTap: () {
-            //             setState(() {
-            //               _defaultCountry = "Dhaka";
-            //             });
-            //           },
-            //         ),
-            //         DropdownMenuItem(
-            //           value: "Kabul",
-            //           alignment: Alignment.centerRight,
-            //           child: const Text("Kabul"),
-            //           onTap: () {
-            //             setState(() {
-            //               _defaultCountry = "Kabul";
-            //             });
-            //           },
-            //         ),
-            //         DropdownMenuItem(
-            //           value: "Delhi",
-            //           alignment: Alignment.centerRight,
-            //           child: const Text("Delhi"),
-            //           onTap: () {
-            //             setState(() {
-            //               _defaultCountry = "Delhi";
-            //             });
-            //           },
-            //         ),
-            //       ],
-            //       onChanged: (String? value) {}),
-            // ),
+            // dropdown button
+            Container(
+              alignment: Alignment.center,
+              width: 50.0,
+              // color: Colors.black87,
+              child: DropdownButton(
+                  value: _defaultCountry,
+                  dropdownColor: Colors.black45,
+                  focusColor: Colors.indigoAccent,
+                  borderRadius: BorderRadius.circular(7.0),
+                  icon: const Icon(Icons.pin_drop, color: Colors.cyan),
+                  style: const TextStyle(color: Colors.tealAccent),
+                  alignment: Alignment.center,
+                  items: [
+                    DropdownMenuItem(
+                      value: "City",
+                      enabled: false,
+                      alignment: Alignment.centerRight,
+                      child: const Text("City"),
+                      onTap: () {
+                        setState(() {
+                          _defaultCountry = "City";
+                        });
+                      },
+                    ),
+                    DropdownMenuItem(
+                      value: "Dhaka",
+                      alignment: Alignment.centerRight,
+                      child: const Text("Dhaka"),
+                      onTap: () {
+                        setState(() {
+                          _defaultCountry = "Dhaka";
+                        });
+                      },
+                    ),
+                    DropdownMenuItem(
+                      value: "Kabul",
+                      alignment: Alignment.centerRight,
+                      child: const Text("Kabul"),
+                      onTap: () {
+                        setState(() {
+                          _defaultCountry = "Kabul";
+                        });
+                      },
+                    ),
+                    DropdownMenuItem(
+                      value: "Delhi",
+                      alignment: Alignment.centerRight,
+                      child: const Text("Delhi"),
+                      onTap: () {
+                        setState(() {
+                          _defaultCountry = "Delhi";
+                        });
+                      },
+                    ),
+                  ],
+                  onChanged: (String? value) {}),
+            ),
+
+            // default home data
             // Container(
             //   // color: Colors.cyan,
             //   height: 200.0,
@@ -256,6 +260,7 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
             //     ],
             //   ),
             // ),
+            // // sunrise and sunset
             // Stack(
             //   alignment: AlignmentDirectional.center,
             //   // fit: StackFit.expand,
@@ -324,20 +329,18 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
             //     ),
             //   ],
             // ),
-            Container(
-              child: FutureBuilder<Weather>(
-                future: response,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Text(snapshot.data!.main['temp'].toString());
-                  } else if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
-                  }
+            FutureBuilder<Weather>(
+              future: response,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return homeWeather(context, snapshot);
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
 
-                  // By default, show a loading spinner.
-                  return const CircularProgressIndicator();
-                },
-              ),
+                // By default, show a loading spinner.
+                return const CircularProgressIndicator();
+              },
             ),
           ],
         ),

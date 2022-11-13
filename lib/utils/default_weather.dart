@@ -28,7 +28,7 @@ class Weather {
   final weather;
   final sys;
 
-  const Weather({
+  Weather({
     required this.main,
     required this.weather,
     required this.sys,
@@ -41,4 +41,9 @@ class Weather {
       sys: json['sys'],
     );
   }
+}
+
+integerToTime(integerValue) {
+  var time = DateTime.fromMillisecondsSinceEpoch(integerValue * 1000);
+  return "${time.hour}:${time.minute}";
 }
