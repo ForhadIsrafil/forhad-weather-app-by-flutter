@@ -31,10 +31,10 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
   // static List<String> countryList = <String>['One', 'Two', 'Three', 'Four'];
 
   var _defaultCountry = "City";
-  var _inputCountry;
+  var _inputCity;
   bool isError = false;
 
-  final _inputCountryController = TextEditingController();
+  final _inputCityController = TextEditingController();
   late Future<Weather> response;
 
   @override
@@ -42,13 +42,13 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
     // TODO: implement initState
     super.initState();
 
-    _inputCountryController.addListener(_updateCountry);
+    _inputCityController.addListener(_updateCity);
     response = getDefaultData();
   }
 
-  void _updateCountry() {
+  void _updateCity() {
     setState(() {
-      _inputCountry = _inputCountryController.text;
+      _inputCity = _inputCityController.text;
     });
   }
 
@@ -74,19 +74,19 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
               alignment: Alignment.center,
               margin: const EdgeInsets.all(2.0),
               child: TextFormField(
-                controller: _inputCountryController,
+                controller: _inputCityController,
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(10),
                 ],
                 // onChanged: (value) {},
                 style: const TextStyle(fontWeight: FontWeight.bold),
                 decoration: InputDecoration(
-                  label: const Text('Country Name',
+                  label: const Text('City Name',
                       style: TextStyle(
                           fontSize: 20.0,
                           color: Colors.black,
                           fontWeight: FontWeight.bold)),
-                  hintText: "Enter Country Name",
+                  hintText: "Enter City Name",
                   suffixIcon: const Icon(Icons.search, color: Colors.white),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -98,7 +98,7 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
                   fillColor: Colors.teal,
                   filled: true,
                   errorText: isError == true
-                      ? "Country Name Is Too Short,\nAt Least 4 Words"
+                      ? "City Name Is Too Short,\nAt Least 4 Words"
                       : null,
                   errorStyle: const TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -109,7 +109,7 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
               child: ElevatedButton(
                 onPressed: () {
                   // print("hitted.....");
-                  if (_inputCountryController.text.length < 4) {
+                  if (_inputCityController.text.length < 4) {
                     isError = true;
                     Future.delayed(const Duration(seconds: 10), () {
                       setState(() {
@@ -120,9 +120,9 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) {
-                        // return const WeatherDetails(inputCountry: _inputCountryController.text);
+                        // return const WeatherDetails(inputCountry: _inputCityController.text);
                         return WeatherDetails(
-                          inputCountry: _inputCountryController.text,
+                          inputCountry: _inputCityController.text,
                         );
                       }),
                     );
@@ -207,7 +207,7 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) {
-                        // return const WeatherDetails(inputCountry: _inputCountryController.text);
+                        // return const WeatherDetails(inputCountry: _inputCityController.text);
                         return WeatherDetails(
                           inputCountry: value.toString(),
                         );
