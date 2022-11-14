@@ -203,132 +203,19 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
                       },
                     ),
                   ],
-                  onChanged: (String? value) {}),
+                  onChanged: (String? value) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        // return const WeatherDetails(inputCountry: _inputCountryController.text);
+                        return WeatherDetails(
+                          inputCountry: value.toString(),
+                        );
+                      }),
+                    );
+                  }),
             ),
 
-            // default home data
-            // Container(
-            //   // color: Colors.cyan,
-            //   height: 200.0,
-            //   width: 150.0,
-            //   decoration: BoxDecoration(
-            //       color: Colors.teal,
-            //       border: Border.all(
-            //         color: Colors.blueGrey,
-            //         width: 6.0,
-            //       ),
-            //       shape: BoxShape.rectangle,
-            //       borderRadius: BorderRadius.circular(15.0)),
-            //   alignment: Alignment.center,
-            //   margin: const EdgeInsets.only(top: 100.0),
-            //   padding: const EdgeInsets.all(10.0),
-            //   child: ListView(
-            //     padding: const EdgeInsets.all(10.0),
-            //     children: [
-            //       Text.rich(TextSpan(style: TextStyle(), children: [
-            //         const TextSpan(
-            //             text: "Dhaka\n",
-            //             style: TextStyle(
-            //               fontSize: 35.0,
-            //               fontWeight: FontWeight.bold,
-            //               color: Colors.white,
-            //             )),
-            //         TextSpan(
-            //           text: "Temperature: $response°\n",
-            //           style: const TextStyle(
-            //               fontSize: 20.0,
-            //               fontWeight: FontWeight.bold,
-            //               color: Colors.white),
-            //         ),
-            //         const TextSpan(
-            //           text: "Clear sky\n",
-            //           style: TextStyle(
-            //             fontSize: 15.0,
-            //             fontWeight: FontWeight.bold,
-            //             color: Colors.white,
-            //           ),
-            //         ),
-            //         const WidgetSpan(
-            //             child: Image(
-            //           image: NetworkImage(
-            //               "https://openweathermap.org/img/wn/01n@2x.png"),
-            //           color: Colors.yellow,
-            //           alignment: Alignment.center,
-            //           fit: BoxFit.fill,
-            //         )),
-            //       ])),
-            //     ],
-            //   ),
-            // ),
-            // // sunrise and sunset
-            // Stack(
-            //   alignment: AlignmentDirectional.center,
-            //   // fit: StackFit.expand,
-            //   children: [
-            //     SizedBox(
-            //       // height: 50,
-            //       width: MediaQuery.of(context).size.width,
-            //       // height: random.nextInt(200).toDouble() >= 100 ? random.nextInt(200).toDouble() : 200.0,
-            //       // color: Color.fromARGB(random.nextInt(255), random.nextInt(255),
-            //       //     random.nextInt(255), random.nextInt(255)),
-            //
-            //       child: CustomPaint(
-            //         painter: ShapePainter(),
-            //       ),
-            //     ),
-            //     Container(
-            //       alignment: Alignment.topLeft,
-            //       padding:
-            //           const EdgeInsets.only(bottom: 100, left: 10, top: 10),
-            //       child: Column(
-            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //         children: const [
-            //           Icon(
-            //             Icons.sunny,
-            //             size: 50,
-            //             color: Colors.yellow,
-            //           ),
-            //           Text(
-            //             "Sunrise",
-            //             textAlign: TextAlign.center,
-            //             style: TextStyle(
-            //                 fontWeight: FontWeight.bold, color: Colors.red),
-            //           ),
-            //           Text(
-            //             "5:50",
-            //             style: TextStyle(fontWeight: FontWeight.bold),
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //     Container(
-            //       alignment: Alignment.topRight,
-            //       padding:
-            //           const EdgeInsets.only(bottom: 100, right: 10, top: 10),
-            //       child: Column(
-            //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //         children: const [
-            //           Icon(
-            //             Icons.sunny,
-            //             size: 50,
-            //             color: Colors.black54,
-            //           ),
-            //           Text(
-            //             "Sunset",
-            //             textAlign: TextAlign.center,
-            //             style: TextStyle(
-            //                 fontWeight: FontWeight.bold,
-            //                 color: Colors.blueGrey),
-            //           ),
-            //           Text(
-            //             "5:50",
-            //             style: TextStyle(fontWeight: FontWeight.bold),
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //   ],
-            // ),
             FutureBuilder<Weather>(
               future: response,
               builder: (context, snapshot) {
