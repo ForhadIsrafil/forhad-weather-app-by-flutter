@@ -51,7 +51,31 @@ class _InputWeatherState extends State<InputWeather> {
         if (snapshot.hasData) {
           return inputWeatherDetails(context, snapshot, country);
         } else if (snapshot.hasError) {
-          return Text('${snapshot.error}');
+          // return Text("${snapshot.error}");
+          return Container(
+            height: 350.0,
+            width: 450.0,
+            decoration: const BoxDecoration(
+              color: Colors.red,
+              // border: Border.all(
+              //   color: Colors.blueGrey,
+              //   width: 6.0,
+              // ),
+              // shape: BoxShape.rectangle,
+              // borderRadius: BorderRadius.circular(15.0),
+            ),
+            alignment: Alignment.center,
+            margin: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.all(10.0),
+            child: const Text(
+              "Failed To Load Data",
+              style: TextStyle(
+                  color: Colors.white,
+                  letterSpacing: 20.0,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 50.0),
+            ),
+          );
         }
         // By default, show a loading spinner/Progress.
         return const LinearProgressIndicator();

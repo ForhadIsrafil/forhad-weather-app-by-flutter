@@ -64,7 +64,7 @@ Center homeWeather(context, snapshot) {
         child: ListView(
           padding: const EdgeInsets.all(10.0),
           children: [
-            Text.rich(TextSpan(style: TextStyle(), children: [
+            Text.rich(TextSpan(style: const TextStyle(), children: [
               const TextSpan(
                   text: "Dhaka\n",
                   style: TextStyle(
