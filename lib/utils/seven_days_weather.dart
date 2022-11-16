@@ -43,7 +43,7 @@ Column sevenDaysWeather(String day, IconData icon, String weatherValue) {
   );
 }
 
-Center homeWeather(context, snapshot){
+Center homeWeather(context, snapshot) {
   return Center(
     child: ListBody(children: [
       Container(
@@ -73,16 +73,14 @@ Center homeWeather(context, snapshot){
                     color: Colors.white,
                   )),
               TextSpan(
-                text:
-                "Temperature: ${snapshot.data!.main['temp']}°\n",
+                text: "Temperature: ${snapshot.data!.main['temp'].ceil()}°\n",
                 style: const TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),
               TextSpan(
-                text:
-                "${snapshot.data!.weather[0]['description']}\n",
+                text: "${snapshot.data!.weather[0]['description']}\n",
                 style: const TextStyle(
                   fontSize: 15.0,
                   fontWeight: FontWeight.bold,
@@ -91,12 +89,12 @@ Center homeWeather(context, snapshot){
               ),
               WidgetSpan(
                   child: Image(
-                    image: NetworkImage(
-                        "https://openweathermap.org/img/wn/${snapshot.data!.weather[0]['icon']}@2x.png"),
-                    color: Colors.white,
-                    alignment: Alignment.center,
-                    fit: BoxFit.fill,
-                  )),
+                image: NetworkImage(
+                    "https://openweathermap.org/img/wn/${snapshot.data!.weather[0]['icon']}@2x.png"),
+                color: Colors.white,
+                alignment: Alignment.center,
+                fit: BoxFit.fill,
+              )),
             ])),
           ],
         ),
@@ -119,8 +117,7 @@ Center homeWeather(context, snapshot){
           ),
           Container(
             alignment: Alignment.topLeft,
-            padding: const EdgeInsets.only(
-                bottom: 100, left: 10, top: 10),
+            padding: const EdgeInsets.only(bottom: 100, left: 10, top: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -132,9 +129,8 @@ Center homeWeather(context, snapshot){
                 const Text(
                   "Sunrise",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red),
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
                 ),
                 Text(
                   integerToTime(snapshot.data!.sys['sunrise']),
@@ -145,8 +141,7 @@ Center homeWeather(context, snapshot){
           ),
           Container(
             alignment: Alignment.topRight,
-            padding: const EdgeInsets.only(
-                bottom: 100, right: 10, top: 10),
+            padding: const EdgeInsets.only(bottom: 100, right: 10, top: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -159,8 +154,7 @@ Center homeWeather(context, snapshot){
                   "Sunset",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueGrey),
+                      fontWeight: FontWeight.bold, color: Colors.blueGrey),
                 ),
                 Text(
                   integerToTime(snapshot.data!.sys['sunset']),
@@ -174,3 +168,64 @@ Center homeWeather(context, snapshot){
     ]),
   );
 }
+
+/*
+Container(
+              color: Colors.white,
+              height: 80.0,
+              child: ListView(
+                padding: const EdgeInsets.all(1.0),
+                children: const [
+                  ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.lightGreen,
+                      child: Icon(Icons.cloud, color: Colors.white),
+                    ),
+                    title: Text(
+                      "Tomorrow",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                      "Cloudy",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    trailing: Text(
+                      "30/27 °C",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    textColor: Colors.blueGrey,
+                  ),
+                ],
+              ),
+            ),
+ Container(
+              color: Colors.indigo,
+              padding: const EdgeInsets.all(5.0),
+              height: 50.0,
+              child: const Text(
+                "Next 5 day Weather of the city",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+            ),
+Container(
+              color: Colors.indigo,
+              padding: const EdgeInsets.all(5.0),
+              height: 150.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  sevenDaysWeather("Sat", Icons.cloud_circle, "20"),
+                  sevenDaysWeather("Sun", Icons.cloud_circle, "20"),
+                  sevenDaysWeather("Mon", Icons.thunderstorm, "20"),
+                  sevenDaysWeather("Tue", Icons.thunderstorm_outlined, "20"),
+                  sevenDaysWeather("Wed", Icons.cloud_circle, "20"),
+                  sevenDaysWeather("Thur", Icons.cloud_circle, "20"),
+                  sevenDaysWeather("Fri", Icons.water_drop_outlined, "20"),
+                ],
+              ),
+            ),
+* */

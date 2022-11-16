@@ -224,9 +224,8 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
                 } else if (snapshot.hasError) {
                   return Text('${snapshot.error}');
                 }
-
-                // By default, show a loading spinner.
-                return const CircularProgressIndicator();
+                // By default, show a loading spinner/Progress.
+                return const LinearProgressIndicator();
               },
             ),
           ],
