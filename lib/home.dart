@@ -92,7 +92,7 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
                       borderRadius: BorderRadius.circular(10),
                       borderSide: const BorderSide(
                           width: 200,
-                          strokeAlign: StrokeAlign.outside,
+                          strokeAlign: BorderSide.strokeAlignOutside,
                           color: Colors.black,
                           style: BorderStyle.solid)),
                   fillColor: Colors.teal,
