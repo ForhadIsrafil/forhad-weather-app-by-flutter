@@ -49,7 +49,7 @@ class _InputWeatherState extends State<InputWeather> {
       future: response,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return inputWeatherDetails(context, snapshot, country);
+          return inputWeatherDetails(context, snapshot.data!, country);
         } else if (snapshot.hasError) {
           // return Text("${snapshot.error}");
           return Container(
@@ -108,7 +108,7 @@ Widget inputWeatherDetails(context, snapshot, country) {
                 top: 55.0,
                 // left: 85.50,
                 child: Text(
-                  "${snapshot.data!.main['temp'].ceil()}°C",
+                  "${snapshot.main['temp'].ceil()}°C",
                   style: const TextStyle(
                       fontSize: 30.0, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
@@ -118,7 +118,7 @@ Widget inputWeatherDetails(context, snapshot, country) {
                 top: 85.0,
                 // left: 85.50,
                 child: Text(
-                  "${snapshot.data!.weather[0]['description']}",
+                  "${snapshot.weather[0]['description']}",
                   style: const TextStyle(
                       fontSize: 15.0, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
@@ -129,7 +129,7 @@ Widget inputWeatherDetails(context, snapshot, country) {
                 left: 82.50,
                 child: Image(
                   image: NetworkImage(
-                      "https://openweathermap.org/img/wn/${snapshot.data!.weather[0]['icon']}@2x.png"),
+                      "https://openweathermap.org/img/wn/${snapshot.weather[0]['icon']}@2x.png"),
                   color: Colors.white,
                   alignment: Alignment.center,
                   fit: BoxFit.fill,
@@ -140,7 +140,7 @@ Widget inputWeatherDetails(context, snapshot, country) {
                 right: 10.0,
                 // left: 85.50,
                 child: Text(
-                  "Humidity: ${snapshot.data!.main['humidity']}",
+                  "Humidity: ${snapshot.main['humidity']}",
                   style: const TextStyle(
                       fontSize: 20.0, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
@@ -182,7 +182,7 @@ Widget inputWeatherDetails(context, snapshot, country) {
                         fontWeight: FontWeight.bold, color: Colors.red),
                   ),
                   Text(
-                    "${integerToTime(snapshot.data!.sys['sunrise'])} AM",
+                    "${integerToTime(snapshot.sys['sunrise'])} AM",
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -206,7 +206,7 @@ Widget inputWeatherDetails(context, snapshot, country) {
                         fontWeight: FontWeight.bold, color: Colors.blueGrey),
                   ),
                   Text(
-                    "${integerToTime(snapshot.data!.sys['sunset'])} PM",
+                    "${integerToTime(snapshot.sys['sunset'])} PM",
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
