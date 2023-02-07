@@ -73,14 +73,14 @@ Center homeWeather(context, snapshot) {
                     color: Colors.white,
                   )),
               TextSpan(
-                text: "Temperature: ${snapshot.data!.main['temp'].ceil()}°\n",
+                text: "Temperature: ${snapshot.main['temp'].ceil()}°\n",
                 style: const TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),
               TextSpan(
-                text: "${snapshot.data!.weather[0]['description']}\n",
+                text: "${snapshot.weather[0]['description']}\n",
                 style: const TextStyle(
                   fontSize: 15.0,
                   fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ Center homeWeather(context, snapshot) {
               WidgetSpan(
                   child: Image(
                 image: NetworkImage(
-                    "https://openweathermap.org/img/wn/${snapshot.data!.weather[0]['icon']}@2x.png"),
+                    "https://openweathermap.org/img/wn/${snapshot.weather[0]['icon']}@2x.png"),
                 color: Colors.white,
                 alignment: Alignment.center,
                 fit: BoxFit.fill,
@@ -133,7 +133,7 @@ Center homeWeather(context, snapshot) {
                       TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
                 ),
                 Text(
-                  integerToTime(snapshot.data!.sys['sunrise']),
+                  integerToTime(snapshot.sys['sunrise']),
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -157,7 +157,7 @@ Center homeWeather(context, snapshot) {
                       fontWeight: FontWeight.bold, color: Colors.blueGrey),
                 ),
                 Text(
-                  integerToTime(snapshot.data!.sys['sunset']),
+                  integerToTime(snapshot.sys['sunset']),
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],

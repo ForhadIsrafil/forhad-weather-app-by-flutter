@@ -220,7 +220,7 @@ class _HandleWeatherInputState extends State<HandleWeatherInput> {
               future: response,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return homeWeather(context, snapshot);
+                  return homeWeather(context, snapshot.data!);
                 } else if (snapshot.hasError) {
                   return Text('${snapshot.error}');
                 }
