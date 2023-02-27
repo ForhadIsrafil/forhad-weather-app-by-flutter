@@ -42,6 +42,11 @@ class _InputWeatherState extends State<InputWeather> {
 
     response = getInputCityWeather(country);
   }
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
